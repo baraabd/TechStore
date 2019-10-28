@@ -2,7 +2,6 @@ var listOfProducts;
 
 
 
-var count = 0
 
 /** Get products from the json file and store it in a gobal variable */
 function loadProducts() {
@@ -18,9 +17,9 @@ function loadProducts() {
 
 function initSite() {
     loadProducts();
-    var body = document.getElementsByTagName("body")[0]
-    var container = document.createElement("div")
-    container.classList = "container"
+    var count = JSON.parse(localStorage.getItem('listOfProducts')).length
+    document.getElementById("counter").innerHTML = count
+
 
     // This would also be a good place to initialize other parts of the UI
 }
@@ -74,7 +73,7 @@ function addProductsToWebpage() {
 
         shopItemButton.onclick = function() {
             console.log(this.data)
-            addData()
+            addData(this.data)
         }
 
 
@@ -113,35 +112,21 @@ function addProductsToWebpage() {
     // TODO: Remove the console.log and these comments when you've read them.
 }
 
-function addData() {
+function addData(product) {
+    var cart = JSON.parse(localStorage.getItem('listOfProducts'))
 
-    var title = document.getElementsByClassName("title").innerHTML
-    var description = document.getElementsByClassName("description").innerHTML
-    var image = document.getElementsByClassName("image").src
-    var price = document.getElementsByClassName("price").innerHTML
-    var summa = document.getElementsByClassName("summa").innerHTML
-    summa = parseInt(summa) + parseInt(price)
-        //document.getElementById("summa").innerHTML = summa
+    if (!cart) {
+        cart = []
+    }
 
-    listOfProducts.push({
-        title: title,
-        description: description,
-        price: price,
-        image: image,
-        //count: count
-    })
-    count += 1
+    cart.push(product)
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
 
-    //sessionStorage.setItem("summa", JSON.stringify(summa))
-    sessionStorage.setItem("listOfProducts", JSON.stringify(this.listOfProducts))
-    console.log("listOfProducts", JSON.stringify(this.listOfProducts))
-    document.getElementById("counter").innerHTML = count
-
+    document.getElementById("counter").innerHTML = cart.length
 }
 
-function redirect() {
-    var retrievedData = sessionStorage.getItem("listOfProducts")
-    var product = JSON.parse(retrievedData)
+function loadKundVagen() {
+    var retrievedData = localStorage.getItem("listOfProducts")
+    product = JSON.parse(retrievedData)
     console.log(product)
-
 }

@@ -10,7 +10,7 @@
     <!-- Visit www.fontawesome.com on how to add font icons to your project -->
     <!-- Link your stylesheet file/files, do NOT write styles in the html file! -->
     <link rel="stylesheet" href="./styles.css">
-    <script src="./main.js"></script>
+    <script src="./kundvagensida.js"></script>
 </head>
 
 <body class="testKlass" onload="initSite()">
@@ -24,7 +24,12 @@
         </div>
 
         <div class="shopping-cart">
-            <i class="fas fa-shopping-cart"></i>
+
+            <a href="kundvagnsida.html">
+                <div id="counter"></div>
+            </a>
+            <i class="fas fa-shopping-cart" onclick="redirect()"> </i>
+
         </div>
         <!-- <min></min> -->
         <!--  Add the content of your site here via javascript -->

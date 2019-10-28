@@ -1,20 +1,30 @@
-var listOfProducts;
+var product, listOfProducts
+
 
 
 /** Get products from the json file and store it in a gobal variable */
 function loadProducts() {
-    var retrievedData = localStorage.getItem("kundVagenItem")
-    var product = JSON.parse(retrievedData)
+    fetch("./products.json")
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(products) {
+            listOfProducts = products;
+            addProductsToWebpage();
+        });
 
+
+    var retrievedData = localStorage.getItem("listOfProducts")
+    product = JSON.parse(retrievedData)
+    console.log(product)
+    console.log(listOfProducts)
 }
 
 function initSite() {
-    loadProducts();
-    var body = document.getElementsByTagName("body")[0]
-    var container = document.createElement("div")
-    container.classList = "container"
-
-    // This would also be a good place to initialize other parts of the UI
+    loadProducts()
+    var count = JSON.parse(localStorage.getItem('listOfProducts')).length
+    document.getElementById("counter").innerHTML = count
+        // This would also be a good place to initialize other parts of the UI
 }
 
 /** Uses the loaded products data to create a visible product list on the website */
@@ -29,7 +39,7 @@ function addProductsToWebpage() {
     shopItems.classList = "shop-items"
 
 
-    for (var i = 0; i < listOfProducts.length; i++) {
+    for (var i = 0; i < product.length; i++) {
 
         var shopItem = document.createElement("div")
         shopItem.classList = "shop-item"
@@ -60,13 +70,13 @@ function addProductsToWebpage() {
 
         var shopItemButton = document.createElement("Button")
         var shopItemButtonName = document.createTextNode("Lägg till i kundvagn")
-        shopItemButton.data = listOfProducts[i]
+        shopItemButton.data = product[i]
         shopItemButton.classList = "btn" + " " + "btn-primary" + " " + "shop-item-button"
         shopItemButton.appendChild(shopItemButtonName)
-        shopItemButton.addEventListener("click", addData)
+
         shopItemButton.onclick = function() {
             console.log(this.data)
-            addData()
+            addData(this.data)
         }
 
 
@@ -89,6 +99,7 @@ function addProductsToWebpage() {
 
         shopItems.appendChild(shopItem)
 
+
     }
 
 
@@ -106,29 +117,15 @@ function addProductsToWebpage() {
 }
 
 
+function delteData(product) {
+    var cart = JSON.parse(localStorage.getItem('listOfProducts'))
 
+    if (!cart) {
+        cart = []
+    }
 
-function addData() {
+    cart.push(product)
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
 
-    var title = document.getElementsByClassName("title").innerHTML
-    var description = document.getElementsByClassName("description").innerHTML
-    var image = document.getElementsByClassName("image").src
-    var price = document.getElementsByClassName("price").innerHTML
-    var summa = document.getElementsByClassName("summa").innerHTML
-    summa = parseInt(summa) + parseInt(price)
-        //document.getElementById("summa").innerHTML = summa
-
-
-
-    kundVagenItem.push({
-        title: title,
-        description: description,
-        price: price,
-        image: image,
-        //count: count
-    })
-
-    localStorage.setItem("summa", JSON.stringify(summa))
-    localStorage.setItem("kundVagenItem", JSON.stringify(kundVagenItem))
-
+    document.getElementById("counter").innerHTML = cart.length
 }
