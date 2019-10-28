@@ -1,19 +1,11 @@
 var listOfProducts;
 
 
-
-var count = 0
-
 /** Get products from the json file and store it in a gobal variable */
 function loadProducts() {
-    fetch("./products.json")
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(products) {
-            listOfProducts = products;
-            addProductsToWebpage();
-        });
+    var retrievedData = localStorage.getItem("kundVagenItem")
+    var product = JSON.parse(retrievedData)
+
 }
 
 function initSite() {
@@ -51,7 +43,7 @@ function addProductsToWebpage() {
 
         var shopItemImage = document.createElement("IMG")
         shopItemImage.classList = "shop-item-image"
-        shopItemImage.setAttribute("src", "./assets/" + listOfProducts[i].image)
+        shopItemImage.setAttribute("src", "./assets/" + product[i].image)
         shopItemImage.setAttribute("width", "200")
         shopItemImage.setAttribute("height", "320")
         shopItemImage.setAttribute("alt", "The Pulpit Rock")
@@ -71,7 +63,7 @@ function addProductsToWebpage() {
         shopItemButton.data = listOfProducts[i]
         shopItemButton.classList = "btn" + " " + "btn-primary" + " " + "shop-item-button"
         shopItemButton.appendChild(shopItemButtonName)
-
+        shopItemButton.addEventListener("click", addData)
         shopItemButton.onclick = function() {
             console.log(this.data)
             addData()
@@ -79,10 +71,10 @@ function addProductsToWebpage() {
 
 
 
-        shopItemTitle.innerText = listOfProducts[i].title
-        shopItemDescription.innerText = listOfProducts[i].description
-        shopItemImage.innerText = "./images" + listOfProducts[i].image
-        shopItemPrice.innerText = listOfProducts[i].price
+        shopItemTitle.innerText = product[i].title
+        shopItemDescription.innerText = product[i].description
+        shopItemImage.innerText = "./images" + product[i].image
+        shopItemPrice.innerText = product[i].price
 
 
         shopItem.appendChild(shopItemTitle)
@@ -113,6 +105,9 @@ function addProductsToWebpage() {
     // TODO: Remove the console.log and these comments when you've read them.
 }
 
+
+
+
 function addData() {
 
     var title = document.getElementsByClassName("title").innerHTML
@@ -123,25 +118,17 @@ function addData() {
     summa = parseInt(summa) + parseInt(price)
         //document.getElementById("summa").innerHTML = summa
 
-    listOfProducts.push({
+
+
+    kundVagenItem.push({
         title: title,
         description: description,
         price: price,
         image: image,
         //count: count
     })
-    count += 1
 
-    //sessionStorage.setItem("summa", JSON.stringify(summa))
-    sessionStorage.setItem("listOfProducts", JSON.stringify(this.listOfProducts))
-    console.log("listOfProducts", JSON.stringify(this.listOfProducts))
-    document.getElementById("counter").innerHTML = count
-
-}
-
-function redirect() {
-    var retrievedData = sessionStorage.getItem("listOfProducts")
-    var product = JSON.parse(retrievedData)
-    console.log(product)
+    localStorage.setItem("summa", JSON.stringify(summa))
+    localStorage.setItem("kundVagenItem", JSON.stringify(kundVagenItem))
 
 }
