@@ -54,7 +54,7 @@ header {
     display: flex;
     background-color: black;
     min-height: 5em;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 }
