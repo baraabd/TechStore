@@ -1,5 +1,5 @@
 var listOfProducts;
-
+var total = 0
 
 
 
@@ -63,20 +63,15 @@ function addProductsToWebpage() {
         var shopItemPrice = document.createElement("span")
         shopItemPrice.classList = "shop-item-price"
 
-        var shopItemButton = document.createElement("Button")
+        var shopItemButton = document.createElement("i")
         shopItemButton.innerText = "Lägg till i kundvagn"
         shopItemButton.data = listOfProducts[i]
-        shopItemButton.classList = "btn" + " " + "btn-primary" + " " + "shop-item-button"
+        shopItemButton.classList = "fas fa-shopping-cart" + " " + "btn" + " " + "btn-primary" + " " + "shop-item-button"
         shopItemButton.onclick = function() {
             console.log(this.data)
             addData(this.data)
         }
 
-        var shopItemButtonIcon = document.createElement("i")
-        shopItemButtonIcon.classList = "fas fa-shopping-cart"
-
-
-        shopItemButton.appendChild(shopItemButtonIcon)
 
         shopItemTitle.innerText = listOfProducts[i].title
         shopItemDescription.innerText = listOfProducts[i].description
@@ -112,21 +107,23 @@ function addProductsToWebpage() {
     // TODO: Remove the console.log and these comments when you've read them.
 }
 
+
 function addData(product) {
+
     var cart = JSON.parse(localStorage.getItem('listOfProducts'))
 
     if (!cart) {
         cart = []
     }
 
+
     cart.push(product)
+    total += parseInt(product.price)
+
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
+    localStorage.setItem("total", total)
+
     localStorage.setItem("listOfProducts", JSON.stringify(cart))
 
     document.getElementById("counter").innerHTML = cart.length
-}
-
-function loadKundVagen() {
-    var retrievedData = localStorage.getItem("listOfProducts")
-    product = JSON.parse(retrievedData)
-    console.log(product)
 }

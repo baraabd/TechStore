@@ -49,7 +49,6 @@ header {
     min-height: 3em;
     justify-content: space-between;
     align-items: center;
-    margin-left: 20p;
     width: 100%;
     height: 70px;
 }
@@ -64,9 +63,9 @@ header h1 {
 
 .shopping-cart {
     display: flex;
-    font-size: 30px;
+    font-size: 35px;
     color: white;
-    margin-right: 20px;
+    margin-right: 30px;
     align-items: center;
 }
 
@@ -183,25 +182,36 @@ header h1 {
     color: white;
     background-color: #6397ed;
     border: none;
-    border-radius: .3em;
+    border-radius: .6em;
     font-weight: bold;
     width: 200px;
+}
+
+i.fas.fa-trash-alt.btn.cart-btn-primary.cart-item-button {
+    font-size: 1em;
+    color: white;
+}
+
+i.fas.fa-trash-alt.btn.closedPurchaseBtn.cart-item-button {
+    font-size: 1.5em;
+    color: white;
 }
 
 .cart-btn-primary {
     color: white;
     background-color: #cf3737;
     border: none;
-    border-radius: .8em;
+    border-radius: .6em;
     font-weight: bold;
     width: 120px;
+    font-size: 1em;
 }
 
 .closedPurchaseBtn {
     color: white;
     background-color: #374ecf;
     border: none;
-    border-radius: .3em;
+    border-radius: .6em;
     font-weight: bold;
     width: 250px;
     font-size: 1em;
@@ -267,7 +277,7 @@ header h1 {
     align-items: center;
     padding: 20px;
     border: 2px solid rgb(79, 79, 236);
-    border-radius: 10px;
+    border-radius: 0.6em;
     background-color: rgb(241, 241, 255);
 }
 
@@ -282,6 +292,27 @@ header h1 {
 
 span.cart-item-price {
     margin-bottom: 15px;
+    color: rgb(12, 12, 12);
+    font-weight: bold;
+}
+
+i.fas.fa-shopping-cart {
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.counter {
+    text-decoration: none;
+}
+
+.fa-shopping-cart:before {
+    content: "\f07a";
+    margin-right: 10px;
+}
+
+.fa-trash-alt:before {
+    content: "\f2ed";
+    margin-right: 7px;
 }
 
 .shop-item-description {
@@ -389,7 +420,7 @@ i.fas.fa-trash-alt {
 .cart-item-image {
     width: auto;
     height: 170px;
-    border-radius: 10px;
+    border-radius: 0.6em;
 }
 
 .cart-item-title {
@@ -406,7 +437,7 @@ i.fas.fa-trash-alt {
     color: white;
     background-color: #EB5757;
     border: none;
-    border-radius: .3em;
+    border-radius: .6em;
     font-weight: bold;
 }
 
@@ -417,7 +448,7 @@ i.fas.fa-trash-alt {
 .cart-quantity-input {
     height: 34px;
     width: 50px;
-    border-radius: 5px;
+    border-radius: 0.6em;
     border: 1px solid #56CCF2;
     background-color: #eee;
     color: #333;

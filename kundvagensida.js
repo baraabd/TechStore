@@ -23,6 +23,7 @@ function loadProducts() {
 function initSite() {
     loadProducts()
     var count = JSON.parse(localStorage.getItem('listOfProducts')).length
+
     document.getElementById("counter").innerHTML = count
         // This would also be a good place to initialize other parts of the UI
 }
@@ -31,7 +32,7 @@ function initSite() {
 
 function addProductsToWebpage() {
     // Check your console to see that the products are stored in the listOfProducts varible.
-
+    var total = JSON.parse(localStorage.getItem('total'))
     var body = document.getElementsByTagName("body")[0]
     var container = document.createElement("section")
     var shopItems = document.createElement("div")
@@ -44,18 +45,16 @@ function addProductsToWebpage() {
 
     var totalCartItemsPrice = document.createElement("div")
     totalCartItemsPrice.classList = "totalCartItemsPrice"
-    totalCartItemsPrice.innerText = "Totalt pris:"
+    totalCartItemsPrice.innerText = "Totalt pris: " + total + " kr"
 
-    var closedPurchase = document.createElement("button")
+    var closedPurchase = document.createElement("i")
     closedPurchase.innerText = "Slut för dit köp"
-    closedPurchase.classList = "btn" + " " + "closedPurchaseBtn" + " " + "cart-item-button "
-
-    var closedPurchaseIcon = document.createElement("i")
-    closedPurchaseIcon.classList = "fas fa-trash-alt"
+    closedPurchase.classList = "fas fa-trash-alt" + " " + "btn" + " " + "closedPurchaseBtn" + " " + "cart-item-button "
 
 
 
-    cartItemsTitleIcon.classList = "fas fa-trash-alt"
+
+    cartItemsTitleIcon.classList = "fas fa-shopping-cart"
     cartItemsTitleContainer.classList = "cartItemsTitleContainer"
     cartItemsTitle.innerText = "Kundvagen"
 
@@ -89,22 +88,16 @@ function addProductsToWebpage() {
 
 
 
-        var shopItemButton = document.createElement("Button")
+        var shopItemButton = document.createElement("i")
         shopItemButton.innerText = "Ta bort"
         shopItemButton.data = product[i]
-        shopItemButton.classList = "btn" + " " + "cart-btn-primary" + " " + "cart-item-button"
+        shopItemButton.classList = "fas fa-trash-alt" + " " + "btn" + " " + "cart-btn-primary" + " " + "cart-item-button"
 
 
         shopItemButton.onclick = function() {
             console.log(this.data)
             addData(this.data)
         }
-
-        var shopItemButtonIcon = document.createElement("i")
-        shopItemButtonIcon.classList = "fas fa-trash-alt"
-
-
-        shopItemButton.appendChild(shopItemButtonIcon)
 
         shopItemTitle.innerText = product[i].title
         shopItemImage.innerText = "./images" + product[i].image
@@ -124,7 +117,8 @@ function addProductsToWebpage() {
         shopItems.appendChild(shopItem)
 
     }
-    cartItemsTitleContainer.appendChild(cartItemsTitleIcon)
+
+
     cartItemsTitleContainer.appendChild(cartItemsTitle)
 
     container.appendChild(cartItemsTitleContainer)
