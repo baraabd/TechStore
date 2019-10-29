@@ -63,25 +63,25 @@ function addProductsToWebpage() {
         var shopItemPrice = document.createElement("span")
         shopItemPrice.classList = "shop-item-price"
 
-
-
         var shopItemButton = document.createElement("Button")
-        var shopItemButtonName = document.createTextNode("Lägg till i kundvagn")
+        shopItemButton.innerText = "Lägg till i kundvagn"
         shopItemButton.data = listOfProducts[i]
         shopItemButton.classList = "btn" + " " + "btn-primary" + " " + "shop-item-button"
-        shopItemButton.appendChild(shopItemButtonName)
-
         shopItemButton.onclick = function() {
             console.log(this.data)
             addData(this.data)
         }
 
+        var shopItemButtonIcon = document.createElement("i")
+        shopItemButtonIcon.classList = "fas fa-shopping-cart"
 
+
+        shopItemButton.appendChild(shopItemButtonIcon)
 
         shopItemTitle.innerText = listOfProducts[i].title
         shopItemDescription.innerText = listOfProducts[i].description
         shopItemImage.innerText = "./images" + listOfProducts[i].image
-        shopItemPrice.innerText = listOfProducts[i].price
+        shopItemPrice.innerText = listOfProducts[i].price + " " + "kr"
 
 
         shopItem.appendChild(shopItemTitle)

@@ -35,24 +35,45 @@ function addProductsToWebpage() {
     var body = document.getElementsByTagName("body")[0]
     var container = document.createElement("section")
     var shopItems = document.createElement("div")
-    container.classList = "container" + " " + "content-section"
-    shopItems.classList = "shop-items"
+
+    var cartItemsTitleContainer = document.createElement("div")
+    var cartItemsTitle = document.createElement("div")
+    cartItemsTitle.classList = "cartItemsTitle"
+    var cartItemsTitleIcon = document.createElement("i")
+
+
+    var totalCartItemsPrice = document.createElement("div")
+    totalCartItemsPrice.classList = "totalCartItemsPrice"
+    totalCartItemsPrice.innerText = "Totalt pris:"
+
+    var closedPurchase = document.createElement("button")
+    closedPurchase.innerText = "Slut för dit köp"
+    closedPurchase.classList = "btn" + " " + "closedPurchaseBtn" + " " + "cart-item-button "
+
+    var closedPurchaseIcon = document.createElement("i")
+    closedPurchaseIcon.classList = "fas fa-trash-alt"
+
+
+
+    cartItemsTitleIcon.classList = "fas fa-trash-alt"
+    cartItemsTitleContainer.classList = "cartItemsTitleContainer"
+    cartItemsTitle.innerText = "Kundvagen"
+
+    container.classList = "cartContainer" + " " + "content-section"
+    shopItems.classList = "cart-items"
 
 
     for (var i = 0; i < product.length; i++) {
 
         var shopItem = document.createElement("div")
-        shopItem.classList = "shop-item"
+        shopItem.classList = "cart-item"
 
         var shopItemTitle = document.createElement("span")
         shopItemTitle.classList = "shop-item-title"
 
-        var shopItemDescription = document.createElement("p")
-        shopItemDescription.classList = "shop-item-description"
-
 
         var shopItemImage = document.createElement("IMG")
-        shopItemImage.classList = "shop-item-image"
+        shopItemImage.classList = "cart-item-image"
         shopItemImage.setAttribute("src", "./assets/" + product[i].image)
         shopItemImage.setAttribute("width", "200")
         shopItemImage.setAttribute("height", "320")
@@ -60,50 +81,56 @@ function addProductsToWebpage() {
 
 
         var shopItemDetails = document.createElement("div")
-        shopItemDetails.classList = "shop-item-details"
+        shopItemDetails.classList = "cart-item-details"
 
 
         var shopItemPrice = document.createElement("span")
-        shopItemPrice.classList = "shop-item-price"
+        shopItemPrice.classList = "cart-item-price"
 
 
 
         var shopItemButton = document.createElement("Button")
-        var shopItemButtonName = document.createTextNode("Lägg till i kundvagn")
+        shopItemButton.innerText = "Ta bort"
         shopItemButton.data = product[i]
-        shopItemButton.classList = "btn" + " " + "btn-primary" + " " + "shop-item-button"
-        shopItemButton.appendChild(shopItemButtonName)
+        shopItemButton.classList = "btn" + " " + "cart-btn-primary" + " " + "cart-item-button"
+
 
         shopItemButton.onclick = function() {
             console.log(this.data)
             addData(this.data)
         }
 
+        var shopItemButtonIcon = document.createElement("i")
+        shopItemButtonIcon.classList = "fas fa-trash-alt"
 
+
+        shopItemButton.appendChild(shopItemButtonIcon)
 
         shopItemTitle.innerText = product[i].title
-        shopItemDescription.innerText = product[i].description
         shopItemImage.innerText = "./images" + product[i].image
-        shopItemPrice.innerText = product[i].price
+        shopItemPrice.innerText = product[i].price + " " + "kr"
 
 
-        shopItem.appendChild(shopItemTitle)
-        shopItem.appendChild(shopItemDescription)
-        shopItem.appendChild(shopItemImage)
+
         shopItem.appendChild(shopItemDetails)
 
-
+        shopItemDetails.appendChild(shopItemImage)
+        shopItemDetails.appendChild(shopItemTitle)
         shopItemDetails.appendChild(shopItemPrice)
-        shopItemDetails.appendChild(shopItemButton)
 
+
+        shopItem.appendChild(shopItemButton)
 
         shopItems.appendChild(shopItem)
 
-
     }
+    cartItemsTitleContainer.appendChild(cartItemsTitleIcon)
+    cartItemsTitleContainer.appendChild(cartItemsTitle)
 
-
+    container.appendChild(cartItemsTitleContainer)
     container.appendChild(shopItems)
+    container.appendChild(totalCartItemsPrice)
+    container.appendChild(closedPurchase)
 
     body.appendChild(container)
 
