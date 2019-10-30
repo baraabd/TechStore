@@ -1,5 +1,5 @@
 var product, listOfProducts
-
+var total = 0
 
 
 /** Get products from the json file and store it in a gobal variable */
@@ -41,6 +41,8 @@ function addProductsToWebpage() {
     var cartItemsTitle = document.createElement("div")
     cartItemsTitle.classList = "cartItemsTitle"
     var cartItemsTitleIcon = document.createElement("i")
+
+
 
 
     var totalCartItemsPrice = document.createElement("div")
@@ -88,16 +90,14 @@ function addProductsToWebpage() {
 
 
 
-        var shopItemButton = document.createElement("i")
-        shopItemButton.innerText = "Ta bort"
-        shopItemButton.data = product[i]
-        shopItemButton.classList = "fas fa-trash-alt" + " " + "btn" + " " + "cart-btn-primary" + " " + "cart-item-button"
-
-
-        shopItemButton.onclick = function() {
-            console.log(this.data)
-            addData(this.data)
+        var taBortButton = document.createElement("i")
+        taBortButton.innerText = "Ta bort"
+        taBortButton.data = product[i]
+        taBortButton.classList = "fas fa-trash-alt" + " " + "btn" + " " + "cart-btn-primary" + " " + "cart-item-button"
+        taBortButton.onclick = function() {
+            removeItem(event, product)
         }
+
 
         shopItemTitle.innerText = product[i].title
         shopItemImage.innerText = "./images" + product[i].image
@@ -112,7 +112,7 @@ function addProductsToWebpage() {
         shopItemDetails.appendChild(shopItemPrice)
 
 
-        shopItem.appendChild(shopItemButton)
+        shopItem.appendChild(taBortButton)
 
         shopItems.appendChild(shopItem)
 
@@ -149,4 +149,27 @@ function delteData(product) {
     localStorage.setItem("listOfProducts", JSON.stringify(cart))
 
     document.getElementById("counter").innerHTML = cart.length
+}
+
+
+function removeItem(event, product) {
+
+    var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+    var buttonclicked = event.target
+
+    console.log(product)
+
+
+    cart.splice(product, 1)
+
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
+    total = localStorage.getItem("total")
+
+    console.log(total)
+
+    buttonclicked.parentElement.remove()
+    total -= product.price
+
+
+
 }
