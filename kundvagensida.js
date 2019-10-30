@@ -1,31 +1,16 @@
-var product, listOfProducts
 var total = 0
 
-
-/** Get products from the json file and store it in a gobal variable */
-function loadProducts() {
-    fetch("./products.json")
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(products) {
-            listOfProducts = products;
-            addProductsToWebpage();
-        });
-
-
+/** Get products from the localstorage and return the list */
+function getCartItems() {
     var retrievedData = localStorage.getItem("listOfProducts")
-    product = JSON.parse(retrievedData)
-    console.log(product)
-    console.log(listOfProducts)
+    if (!retrievedData) { return [] }
+    return JSON.parse(retrievedData)
 }
 
 function initSite() {
-    loadProducts()
-    var count = JSON.parse(localStorage.getItem('listOfProducts')).length
-
+    var count = getCartItems().length
     document.getElementById("counter").innerHTML = count
-        // This would also be a good place to initialize other parts of the UI
+    addProductsToWebpage()
 }
 
 /** Uses the loaded products data to create a visible product list on the website */
@@ -42,9 +27,6 @@ function addProductsToWebpage() {
     cartItemsTitle.classList = "cartItemsTitle"
     var cartItemsTitleIcon = document.createElement("i")
 
-
-
-
     var totalCartItemsPrice = document.createElement("div")
     totalCartItemsPrice.classList = "totalCartItemsPrice"
     totalCartItemsPrice.innerText = "Totalt pris: " + total + " kr"
@@ -53,9 +35,6 @@ function addProductsToWebpage() {
     closedPurchase.innerText = "Slut för dit köp"
     closedPurchase.classList = "fas fa-trash-alt" + " " + "btn" + " " + "closedPurchaseBtn" + " " + "cart-item-button "
 
-
-
-
     cartItemsTitleIcon.classList = "fas fa-shopping-cart"
     cartItemsTitleContainer.classList = "cartItemsTitleContainer"
     cartItemsTitle.innerText = "Kundvagen"
@@ -63,8 +42,9 @@ function addProductsToWebpage() {
     container.classList = "cartContainer" + " " + "content-section"
     shopItems.classList = "cart-items"
 
+    var cartItems = getCartItems()
 
-    for (var i = 0; i < product.length; i++) {
+    for (var i = 0; i < cartItems.length; i++) {
 
         var shopItem = document.createElement("div")
         shopItem.classList = "cart-item"
@@ -72,38 +52,30 @@ function addProductsToWebpage() {
         var shopItemTitle = document.createElement("span")
         shopItemTitle.classList = "shop-item-title"
 
-
         var shopItemImage = document.createElement("IMG")
         shopItemImage.classList = "cart-item-image"
-        shopItemImage.setAttribute("src", "./assets/" + product[i].image)
+        shopItemImage.setAttribute("src", "./assets/" + cartItems[i].image)
         shopItemImage.setAttribute("width", "200")
         shopItemImage.setAttribute("height", "320")
         shopItemImage.setAttribute("alt", "The Pulpit Rock")
 
-
         var shopItemDetails = document.createElement("div")
         shopItemDetails.classList = "cart-item-details"
-
 
         var shopItemPrice = document.createElement("span")
         shopItemPrice.classList = "cart-item-price"
 
-
-
         var taBortButton = document.createElement("i")
         taBortButton.innerText = "Ta bort"
-        taBortButton.data = product[i]
+        taBortButton.data = i
         taBortButton.classList = "fas fa-trash-alt" + " " + "btn" + " " + "cart-btn-primary" + " " + "cart-item-button"
         taBortButton.onclick = function() {
-            removeItem(event, product)
+            removeItem(this.data, event)
         }
 
-
-        shopItemTitle.innerText = product[i].title
-        shopItemImage.innerText = "./images" + product[i].image
-        shopItemPrice.innerText = product[i].price + " " + "kr"
-
-
+        shopItemTitle.innerText = cartItems[i].title
+        shopItemImage.innerText = "./images" + cartItems[i].image
+        shopItemPrice.innerText = cartItems[i].price + " " + "kr"
 
         shopItem.appendChild(shopItemDetails)
 
@@ -111,11 +83,9 @@ function addProductsToWebpage() {
         shopItemDetails.appendChild(shopItemTitle)
         shopItemDetails.appendChild(shopItemPrice)
 
-
         shopItem.appendChild(taBortButton)
 
         shopItems.appendChild(shopItem)
-
     }
 
 
@@ -152,24 +122,37 @@ function delteData(product) {
 }
 
 
-function removeItem(event, product) {
-
-    var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+function removeItem(index, event) {
     var buttonclicked = event.target
+    var cart = getCartItems()
 
-    console.log(product)
-
-
-    cart.splice(product, 1)
-
-    localStorage.setItem("listOfProducts", JSON.stringify(cart))
-    total = localStorage.getItem("total")
-
-    console.log(total)
-
-    buttonclicked.parentElement.remove()
-    total -= product.price
+    for (var i = 0; i < cart.length; i++) {
+        if (i == index) {
+            alert("i" + i)
+            cart.splice(index, 1)
+            buttonclicked.parentElement.remove()
+            localStorage.setItem("listOfProducts", JSON.stringify(cart))
+            break
+        }
+    }
+    console.log(localStorage.getItem("listOfProducts"))
+    console.log(cart.length)
 
 
 
 }
+/* var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+var buttonclicked = event.target
+
+console.log(product)
+
+
+cart.splice(product, 1)
+
+localStorage.setItem("listOfProducts", JSON.stringify(cart))
+total = localStorage.getItem("total")
+
+console.log(total)
+
+buttonclicked.parentElement.remove()
+total -= product.price */
