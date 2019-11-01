@@ -9,8 +9,6 @@ function getCartItems() {
 }
 
 function initSite() {
-    var count = getCartItems().length
-    document.getElementById("counter").innerHTML = count
     addProductsToWebpage()
 }
 
@@ -18,9 +16,12 @@ function initSite() {
 
 function addProductsToWebpage() {
     // Check your console to see that the products are stored in the listOfProducts varible.
+    document.getElementById("counter").innerHTML = getCartItems().length
+    var totalPrice = 0
     var total = JSON.parse(localStorage.getItem('total'))
     var body = document.getElementsByTagName("body")[0]
-    var container = document.createElement("section")
+    var container = document.getElementsByTagName("main")[0]
+    container.innerHTML = ''
     var shopItems = document.createElement("div")
 
     var cartItemsTitleContainer = document.createElement("div")
@@ -28,9 +29,7 @@ function addProductsToWebpage() {
     cartItemsTitle.classList = "cartItemsTitle"
     var cartItemsTitleIcon = document.createElement("i")
 
-    var totalCartItemsPrice = document.createElement("div")
-    totalCartItemsPrice.classList = "totalCartItemsPrice"
-    totalCartItemsPrice.innerText = "Totalt pris: " + total + " kr"
+
 
     var closedPurchase = document.createElement("i")
     closedPurchase.innerText = "Slut för dit köp"
@@ -46,7 +45,7 @@ function addProductsToWebpage() {
     var cartItems = getCartItems()
 
     for (var i = 0; i < cartItems.length; i++) {
-
+        totalPrice += cartItems[i].price
         var shopItem = document.createElement("div")
         shopItem.classList = "cart-item"
 
@@ -73,6 +72,10 @@ function addProductsToWebpage() {
         taBortButton.onclick = function() {
             removeItem(this.data, event)
         }
+
+        var totalCartItemsPrice = document.createElement("div")
+        totalCartItemsPrice.classList = "totalCartItemsPrice"
+        totalCartItemsPrice.innerText = "Totalt pris: " + totalPrice + " kr"
 
         shopItemTitle.innerText = cartItems[i].title
         shopItemImage.innerText = "./images" + cartItems[i].image
@@ -123,35 +126,10 @@ function delteData(product) {
 }
 
 
-function removeItem(index, event) {
-    var buttonClicked = event.target
+function removeItem(index) {
+
     var cart = getCartItems()
-    console.log(cart.length)
-    for (var i = 0; i <= cart.length; i++) {
-        console.log(i)
-        if (i === 0) {
-            console.log("if before --------------------")
-            console.log("index " + index)
-
-            total = localStorage.getItem('total')
-            cart.splice(i, 1)
-
-            total -= cart[i].price
-            console.log(cart[i].price)
-            localStorage.setItem("listOfProducts", JSON.stringify(cart))
-            localStorage.setItem("total", total)
-
-            document.getElementsByClassName("totalCartItemsPrice")[0].innerText = "Totalt pris: " + total + " kr"
-            document.getElementsByClassName("counter")[0].innerText = cart.length
-            console.log("if efter --------------------")
-            console.log("length " + cart.length)
-            buttonClicked.parentElement.remove()
-            break
-
-        } else {
-            console.log("else i " + i)
-            console.log("index " + index)
-
-        }
-    }
+    cart.splice(index, 1)
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
+    addProductsToWebpage()
 }
