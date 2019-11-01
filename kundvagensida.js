@@ -129,14 +129,15 @@ function removeItem(index, event) {
     console.log(cart.length)
     for (var i = 0; i <= cart.length; i++) {
         console.log(i)
-        if (i === index) {
+        if (i === 0) {
             console.log("if before --------------------")
             console.log("index " + index)
 
             total = localStorage.getItem('total')
-            cart.splice(index, 1)
+            cart.splice(i, 1)
 
-            total -= cart[index].price
+            total -= cart[i].price
+            console.log(cart[i].price)
             localStorage.setItem("listOfProducts", JSON.stringify(cart))
             localStorage.setItem("total", total)
 
