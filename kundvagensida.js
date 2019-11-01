@@ -1,5 +1,6 @@
 var total = 0
 
+
 /** Get products from the localstorage and return the list */
 function getCartItems() {
     var retrievedData = localStorage.getItem("listOfProducts")
@@ -123,36 +124,33 @@ function delteData(product) {
 
 
 function removeItem(index, event) {
-    var buttonclicked = event.target
+    var buttonClicked = event.target
     var cart = getCartItems()
+    console.log(cart.length)
+    for (var i = 0; i <= cart.length; i++) {
+        console.log(i)
+        if (i === index) {
+            console.log("if before --------------------")
+            console.log("index " + index)
 
-    for (var i = 0; i < cart.length; i++) {
-        if (i == index) {
-            alert("i" + i)
+            total = localStorage.getItem('total')
             cart.splice(index, 1)
-            buttonclicked.parentElement.remove()
+
+            total -= cart[index].price
             localStorage.setItem("listOfProducts", JSON.stringify(cart))
+            localStorage.setItem("total", total)
+
+            document.getElementsByClassName("totalCartItemsPrice")[0].innerText = "Totalt pris: " + total + " kr"
+            document.getElementsByClassName("counter")[0].innerText = cart.length
+            console.log("if efter --------------------")
+            console.log("length " + cart.length)
+            buttonClicked.parentElement.remove()
             break
+
+        } else {
+            console.log("else i " + i)
+            console.log("index " + index)
+
         }
     }
-    console.log(localStorage.getItem("listOfProducts"))
-    console.log(cart.length)
-
-
-
 }
-/* var cart = JSON.parse(localStorage.getItem('listOfProducts'))
-var buttonclicked = event.target
-
-console.log(product)
-
-
-cart.splice(product, 1)
-
-localStorage.setItem("listOfProducts", JSON.stringify(cart))
-total = localStorage.getItem("total")
-
-console.log(total)
-
-buttonclicked.parentElement.remove()
-total -= product.price */

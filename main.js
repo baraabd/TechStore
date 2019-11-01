@@ -116,7 +116,6 @@ function addData(product) {
         cart = []
     }
 
-
     cart.push(product)
     total += parseInt(product.price)
 
