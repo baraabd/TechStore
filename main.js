@@ -1,4 +1,7 @@
 var listOfProducts;
+var total = 0
+
+
 
 /** Get products from the json file and store it in a gobal variable */
 function loadProducts() {
@@ -14,9 +17,9 @@ function loadProducts() {
 
 function initSite() {
     loadProducts();
-    var body = document.getElementsByTagName("body")[0]
-    var container = document.createElement("div")
-    container.classList = "container"
+    var count = JSON.parse(localStorage.getItem('listOfProducts')).length
+    document.getElementById("counter").innerHTML = count
+
 
     // This would also be a good place to initialize other parts of the UI
 }
@@ -60,20 +63,20 @@ function addProductsToWebpage() {
         var shopItemPrice = document.createElement("span")
         shopItemPrice.classList = "shop-item-price"
 
-
-        var shopItemButton = document.createElement("button")
+        var shopItemButton = document.createElement("i")
         shopItemButton.innerText = "Lägg till i kundvagn"
-        shopItemButton.classList = "btn" + " " + "btn-primary" + " " + "shop-item-button"
-
+        shopItemButton.data = listOfProducts[i]
+        shopItemButton.classList = "fas fa-shopping-cart" + " " + "btn" + " " + "btn-primary" + " " + "shop-item-button"
+        shopItemButton.onclick = function() {
+            console.log(this.data)
+            addData(this.data)
+        }
 
 
         shopItemTitle.innerText = listOfProducts[i].title
         shopItemDescription.innerText = listOfProducts[i].description
         shopItemImage.innerText = "./images" + listOfProducts[i].image
-        shopItemPrice.innerText = listOfProducts[i].price
-
-
-
+        shopItemPrice.innerText = listOfProducts[i].price + " " + "kr"
 
 
         shopItem.appendChild(shopItemTitle)
@@ -82,19 +85,19 @@ function addProductsToWebpage() {
         shopItem.appendChild(shopItemDetails)
 
 
-
-
-
         shopItemDetails.appendChild(shopItemPrice)
         shopItemDetails.appendChild(shopItemButton)
 
 
         shopItems.appendChild(shopItem)
 
-
     }
+
+
     container.appendChild(shopItems)
+
     body.appendChild(container)
+
 
 
     // Add your code here, remember to brake your code in to smaller function blocks
@@ -102,4 +105,24 @@ function addProductsToWebpage() {
     // an explainetory comment like the one for this function, see row 22.
 
     // TODO: Remove the console.log and these comments when you've read them.
+}
+
+
+function addData(product) {
+
+    var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+
+    if (!cart) {
+        cart = []
+    }
+
+    cart.push(product)
+    total += parseInt(product.price)
+
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
+    localStorage.setItem("total", total)
+
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
+
+    document.getElementById("counter").innerHTML = cart.length
 }
