@@ -1,14 +1,31 @@
 var listOfProducts;
 var total = 0
-var userList = [{}]
-    // var userList = [{
-    //     username: "",
-    //     password: "",
-    //     orders: [{
-    //         date: new Date(),
-    //         products: []
-    //     }]
-    // }]
+    //var userList = [{}]
+var userList = [{
+    username: "Bara",
+    password: "123",
+    email: "bara.abd@yahoo.com",
+    orders: [{
+        date: new Date(),
+        products: []
+    }]
+}, {
+    username: "Salwa",
+    password: "456",
+    email: "bara.abd@yahoo.com",
+    orders: [{
+        date: new Date(),
+        products: []
+    }]
+}, {
+    username: "Anu",
+    password: "789",
+    email: "bara.abd@yahoo.com",
+    orders: [{
+        date: new Date(),
+        products: []
+    }]
+}]
 
 function loadProducts() {
     fetch("./products.json")
@@ -23,21 +40,22 @@ function loadProducts() {
 
 function initSite() {
     loadProducts();
-    var count = JSON.parse(localStorage.getItem('listOfProducts')).length
+    localStorage.setItem("userListL", JSON.stringify(userList))
+    var count = 0
+    if (JSON.parse(localStorage.getItem('listOfProducts'))) {
+        count = JSON.parse(localStorage.getItem('listOfProducts')).length
+    }
     document.getElementById("counter").innerHTML = count
 }
 
 function addProductsToWebpage() {
-
     for (var i = 0; i < listOfProducts.length; i++) {
-        //  var container = document.createElement("section")
         var shopItems = createMobileCard(listOfProducts[i])
         document.getElementById("container").appendChild(shopItems)
     }
 }
 
 function createMobileCard(listOfProducts) {
-
     var shopItems = document.createElement("div")
     shopItems.classList = "shop-item" + " " + "content-section"
 
@@ -113,61 +131,45 @@ function Generate() {
     return result
 }
 
-// function register() {
-//     var userList = JSON.parse(localStorage.getItem('userListL'))
-//     var username = document.getElementById("regUsername").value
-//     var password = Generate()
-//     var email = document.getElementById("RegEmail").value
-//     console.log(userList.length)
-//     for (var i = 0; i < userList.length; i++) {
-//         if (username == userList[i].username) {
-//             console.log(userList[i].username)
-//             alert("Du har registrerat redan")
-//         } else if (username !== userList[i].username) {
-//             console.log(i)
-//             console.log(userList[i].username)
-//             userList.push({ username: username, password: password, email: email, orders: [{ date: Date(), products: [] }] })
-//             localStorage.setItem("userListL", JSON.stringify(userList))
-//             break
-//         }
-//     }
-// }
 
-// function Login(product, userList) {
-// var cart = JSON.parse(localStorage.getItem('listOfProducts'))
-// if (!cart) {
-//     cart = []
-// }
-// var userList = JSON.parse(localStorage.getItem('userListL'))
-// for (var i = 1; i < userList.length; i++) {
-//     if (username == userList[i].username) {
-//         alert("Du har registrerat redan")
-//     } else if (username !== userList[i].username) {
-//         userList.push({ username: username, password: password, email: email, orders: [{ date: Date(), products: [] }] })
-//         localStorage.setItem("userListL", JSON.stringify(userList))
-//         break
-//     }
-// }
-// }
 
-function register(userList) {
+function register() {
     var userList = JSON.parse(localStorage.getItem('userListL'))
     var username = document.getElementById("regUsername").value
     var password = Generate()
     var email = document.getElementById("RegEmail").value
 
-    for (var i = 1; i < userList.length; i++) {
+    var accountExists = false
 
+    for (var i = 0; i < userList.length; i++) {
         if (username == userList[i].username) {
-            alert("Du har registrerat redan")
-        } else if (username !== userList[i].username) {
-            userList.push({ username: username, password: password, email: email, orders: [{ date: Date(), products: [] }] })
-            localStorage.setItem("userListL", JSON.stringify(userList))
+            accountExists = true
             break
         }
     }
+    if (accountExists) {
+        // Konto finns
+        alert("Du har registrerat redan")
+    } else {
+        // Konto finns ej
+        userList.push({ username: username, password: password, email: email, orders: [{ date: new Date(), products: [] }] })
+        localStorage.setItem("userListL", JSON.stringify(userList))
+    }
 }
 
-function Login() {
-    alert("fsdfs")
+function Login(product, userList) {
+    // var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+    // if (!cart) {
+    //     cart = []
+    // }
+    // var userList = JSON.parse(localStorage.getItem('userListL'))
+    // for (var i = 1; i < userList.length; i++) {
+    //     if (username == userList[i].username) {
+    //         alert("Du har registrerat redan")
+    //     } else if (username !== userList[i].username) {
+    //         userList.push({ username: username, password: password, email: email, orders: [{ date: Date(), products: [] }] })
+    //         localStorage.setItem("userListL", JSON.stringify(userList))
+    //         break
+    //     }
+    // }
 }
