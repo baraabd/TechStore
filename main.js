@@ -113,7 +113,42 @@ function Generate() {
     return result
 }
 
+// function register() {
+//     var userList = JSON.parse(localStorage.getItem('userListL'))
+//     var username = document.getElementById("regUsername").value
+//     var password = Generate()
+//     var email = document.getElementById("RegEmail").value
+//     console.log(userList.length)
+//     for (var i = 0; i < userList.length; i++) {
+//         if (username == userList[i].username) {
+//             console.log(userList[i].username)
+//             alert("Du har registrerat redan")
+//         } else if (username !== userList[i].username) {
+//             console.log(i)
+//             console.log(userList[i].username)
+//             userList.push({ username: username, password: password, email: email, orders: [{ date: Date(), products: [] }] })
+//             localStorage.setItem("userListL", JSON.stringify(userList))
+//             break
+//         }
+//     }
+// }
 
+// function Login(product, userList) {
+// var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+// if (!cart) {
+//     cart = []
+// }
+// var userList = JSON.parse(localStorage.getItem('userListL'))
+// for (var i = 1; i < userList.length; i++) {
+//     if (username == userList[i].username) {
+//         alert("Du har registrerat redan")
+//     } else if (username !== userList[i].username) {
+//         userList.push({ username: username, password: password, email: email, orders: [{ date: Date(), products: [] }] })
+//         localStorage.setItem("userListL", JSON.stringify(userList))
+//         break
+//     }
+// }
+// }
 
 function register(userList) {
     var userList = JSON.parse(localStorage.getItem('userListL'))
