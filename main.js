@@ -25,6 +25,11 @@ function initSite() {
     loadProducts();
     var count = JSON.parse(localStorage.getItem('listOfProducts')).length
     document.getElementById("counter").innerHTML = count
+    if( count == null || count == 0 ){
+        document.getElementById("counter").style.backgroundColor = "#F5F5F5"
+    }else{
+        document.getElementById("counter").style.backgroundColor = "#E64E4E"
+    }
 }
 
 function addProductsToWebpage() {
@@ -86,6 +91,7 @@ function createMobileCard(listOfProducts) {
 
 }
 
+
 function addData(product) {
 
     var cart = JSON.parse(localStorage.getItem('listOfProducts'))
@@ -97,6 +103,11 @@ function addData(product) {
     localStorage.setItem("listOfProducts", JSON.stringify(cart))
     localStorage.setItem("total", total)
     document.getElementById("counter").innerHTML = cart.length
+    if( document.getElementById("counter").innerHTML == null || document.getElementById("counter").innerHTML == 0 ){
+        document.getElementById("counter").style.backgroundColor = "#F5F5F5"
+    }else{
+        document.getElementById("counter").style.backgroundColor = "#E64E4E"
+    }
 }
 
 
