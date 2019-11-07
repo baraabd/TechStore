@@ -23,18 +23,84 @@
         </div>
 
         <div class="shopping-cart">
-
+            <button id="signIn" class="signInOut" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Logga in</button>
             <a href="kundvagnsida.html" class="counter">
-                <div id="counter" class="counter"></div>
+                <i class="fas fa-shopping-cart" onclick="redirect()"></i>
             </a>
-            <i class="fas fa-shopping-cart" onclick="redirect()"></i>
-
-
+            <div id="counter" class="counter"></div>
         </div>
+
         <!-- <min></min> -->
     </header>
 
-    <main>
+    <main id="container" class="container">
+
+        <div>
+            <div id="id01" class="modal">
+
+                <form class="modal-content animate" action="/action_page.php" method="post">
+                    <div class="imgcontainer">
+
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <div class="signInText">Logga in</div>
+                    </div>
+
+                    <div class="signContainer1">
+
+                        <label for="uname"><b>Användarnamn</b></label>
+                        <input type="text" placeholder="Enge Användarnamn!" id="signUsername" required>
+                        <label for="psw"><b>lösnord</b></label>
+                        <input type="password" placeholder="Enge lösnord!" id="signPassword" required>
+
+                        <button type="submit" onclick="Login()">Logga in</button>
+
+
+                        <input type="checkbox" checked="checked" id="remember"> Kommer ihåg mig
+
+
+                        <span class="psw"><a href="#">Glömt lösnord?</a></span>
+                    </div>
+
+                    <div class="signContainer">
+
+                        <span class="psw1">Ny på TechStore?<a href="#" id="signIn" onclick="document.getElementById('id02').style.display='block'" >Skapa ett konto</a></span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div>
+            <div id="id02" class="modal">
+
+                <form class="modal-content animate">
+
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <div class="signInText">Register</div>
+                    </div>
+
+                    <div class="regContainer">
+
+                        <label for="fName"><b>Användarnamn</b></label>
+                        <input type="text" placeholder="Enge Användarnamn" id="regUsername" required>
+
+                        <label for="email"><b>E-postadress</b></label>
+                        <input type="text" placeholder="Enge E-postadress" id="RegEmail" required onclick="Generate()">
+
+                        <button type="submit" onclick="register()">Register</button>
+
+                    </div>
+                    <div class="signContainer">
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+
         <!--  Add the content of your site here via javascript -->
     </main>
 </body>

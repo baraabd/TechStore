@@ -29,11 +29,12 @@ function addProductsToWebpage() {
     cartItemsTitle.classList = "cartItemsTitle"
     var cartItemsTitleIcon = document.createElement("i")
 
-
-
     var closedPurchase = document.createElement("i")
     closedPurchase.innerText = "Slut för dit köp"
     closedPurchase.classList = "fas fa-trash-alt" + " " + "btn" + " " + "closedPurchaseBtn" + " " + "cart-item-button "
+    closedPurchase.onclick = function() {
+        deletedData(this.data)
+    }
 
     cartItemsTitleIcon.classList = "fas fa-shopping-cart"
     cartItemsTitleContainer.classList = "cartItemsTitleContainer"
@@ -70,7 +71,7 @@ function addProductsToWebpage() {
         taBortButton.data = i
         taBortButton.classList = "fas fa-trash-alt" + " " + "btn" + " " + "cart-btn-primary" + " " + "cart-item-button"
         taBortButton.onclick = function() {
-            removeItem(this.data, event)
+            removeItem(this.data)
         }
 
         var totalCartItemsPrice = document.createElement("div")
@@ -112,24 +113,17 @@ function addProductsToWebpage() {
 }
 
 
-function delteData(product) {
-    var cart = JSON.parse(localStorage.getItem('listOfProducts'))
-
-    if (!cart) {
-        cart = []
-    }
-
-    cart.push(product)
-    localStorage.setItem("listOfProducts", JSON.stringify(cart))
-
-    document.getElementById("counter").innerHTML = cart.length
-}
-
-
 function removeItem(index) {
-
     var cart = getCartItems()
     cart.splice(index, 1)
     localStorage.setItem("listOfProducts", JSON.stringify(cart))
     addProductsToWebpage()
+}
+
+function deletedData(index) {
+    var cart = getCartItems()
+    cart.splice(0, cart.length)
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
+    window.location.pathname = 'index.html'
+
 }
