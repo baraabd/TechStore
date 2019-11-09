@@ -1,0 +1,51 @@
+[{
+    "title": "iPhone X",
+    "description": "Last years phone from Apple with a beautiful all display front.",
+    "image": "iPhoneX.png",
+    "price": 11495
+}, {
+    "title": "One Plus 5",
+    "description": "Sleek and powerful smartphone from One Plus.",
+    "image": "OnePlus5.png",
+    "price": 4995
+}, {
+    "title": "Galaxy S8",
+    "description": "Really cool edge to edge smartphone from Samsung.",
+    "image": "SamsungS8.png",
+    "price": 7990
+}, {
+    "title": "LG V30",
+    "description": "Super nice and beautiful smartphone from LG.",
+    "image": "LGV30.png",
+    "price": 7495
+}, {
+    "title": "Huawei P30",
+    "description": " Leica quad camera to help you capture every little detail.",
+    "image": "huawei_p30_pro.png",
+    "price": 9990
+}, {
+    "title": "Galaxy S10",
+    "description": "Rear triple camera, wireless charging technology and 4K video playback.",
+    "image": "samsung-galaxy-s10-plus.png",
+    "price": 15190
+}, {
+    "title": "BV9600",
+    "description": "Shock-resistant and waterproof smartphone.",
+    "image": "blackview-bv9600.png",
+    "price": 3499
+}, {
+    "title": "Nokia 9",
+    "description": "Five 12 Mpx rear cameras with Zeiss optics.",
+    "image": "nokia-9-pureview.png",
+    "price": 6490
+}, {
+    "title": "OnePlus 7",
+    "description": "The pop-up camera's lift mechanism.",
+    "image": "oneplus-7-pro.png",
+    "price": 9699
+}, {
+    "title": "Asus rog",
+    "description": "The pop-up camera's lift mechanism.",
+    "image": "asus.png",
+    "price": 9200
+}]
