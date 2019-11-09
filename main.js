@@ -27,6 +27,14 @@ var userList = [{
     }]
 }]
 
+function changeCounterColor() {
+    if (parseInt(document.getElementById("counter").innerHTML) != 0) {
+        document.getElementById("counter").style.backgroundColor = "#E64E4E"
+    } else {
+        document.getElementById("counter").style.backgroundColor = "#F5F5F5"
+    }
+}
+
 function loadProducts() {
     fetch("./products.json")
         .then(function(response) {
@@ -35,12 +43,13 @@ function loadProducts() {
         .then(function(products) {
             listOfProducts = products;
             addProductsToWebpage();
+            localStorage.setItem("userList", JSON.stringify(userList))
         });
 }
 
 function initSite() {
     loadProducts();
-    localStorage.setItem("userListL", JSON.stringify(userList))
+
     var count = 0
     if (JSON.parse(localStorage.getItem('listOfProducts'))) {
         count = JSON.parse(localStorage.getItem('listOfProducts')).length
@@ -53,6 +62,7 @@ function addProductsToWebpage() {
         var shopItems = createMobileCard(listOfProducts[i])
         document.getElementById("container").appendChild(shopItems)
     }
+    changeCounterColor()
 }
 
 function createMobileCard(listOfProducts) {
@@ -89,7 +99,6 @@ function createMobileCard(listOfProducts) {
     shopItemButton.data = listOfProducts
     shopItemButton.classList = "fas fa-shopping-cart" + " " + "btn" + " " + "btn-primary" + " " + "shop-item-button"
     shopItemButton.onclick = function() {
-        console.log(this.data)
         addData(this.data)
     }
 
@@ -105,19 +114,30 @@ function createMobileCard(listOfProducts) {
 }
 
 function addData(product) {
+    var checkCaseOfLogin = document.getElementById("signIn").innerText
+    var modalSignin = document.getElementById('modalSignin')
 
-    var cart = JSON.parse(localStorage.getItem('listOfProducts'))
-    if (!cart) {
-        cart = []
+
+    if (checkCaseOfLogin == "Logga in") {
+        modalSignin.style.display = "block"
+
+    } else {
+        var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+        if (!cart) {
+            cart = []
+        }
+        cart.push(product)
+        total += parseInt(product.price)
+        userList[0].orders.products = product
+        console.log(userList)
+        localStorage.setItem("listOfProducts", JSON.stringify(cart))
+        localStorage.setItem("userList1", JSON.stringify(userList))
+        localStorage.setItem("total", total)
+        document.getElementById("counter").innerHTML = cart.length
+        changeCounterColor()
+
     }
-    cart.push(product)
-    total += parseInt(product.price)
-    localStorage.setItem("listOfProducts", JSON.stringify(cart))
-    localStorage.setItem("total", total)
-    document.getElementById("counter").innerHTML = cart.length
 }
-
-
 
 function Generate() {
 
@@ -134,11 +154,11 @@ function Generate() {
 
 
 function register() {
-    var userList = JSON.parse(localStorage.getItem('userListL'))
+    var userList = JSON.parse(localStorage.getItem('userList'))
     var username = document.getElementById("regUsername").value
     var password = Generate()
     var email = document.getElementById("RegEmail").value
-
+    var modalRegister = document.getElementById('modalRegister')
     var accountExists = false
 
     for (var i = 0; i < userList.length; i++) {
@@ -152,24 +172,59 @@ function register() {
         alert("Du har registrerat redan")
     } else {
         // Konto finns ej
-        userList.push({ username: username, password: password, email: email, orders: [{ date: new Date(), products: [] }] })
-        localStorage.setItem("userListL", JSON.stringify(userList))
+        userList.push({ username: username, password: password, email: email, orders: [{ date: new Date(), products: cart }] })
+        localStorage.setItem("userList", JSON.stringify(userList))
+        alert("Du har fått lösernord för att logga in:  " + password)
+        modalRegister.style.display = "none"
     }
 }
 
-function Login(product, userList) {
-    // var cart = JSON.parse(localStorage.getItem('listOfProducts'))
-    // if (!cart) {
-    //     cart = []
-    // }
-    // var userList = JSON.parse(localStorage.getItem('userListL'))
-    // for (var i = 1; i < userList.length; i++) {
-    //     if (username == userList[i].username) {
-    //         alert("Du har registrerat redan")
-    //     } else if (username !== userList[i].username) {
-    //         userList.push({ username: username, password: password, email: email, orders: [{ date: Date(), products: [] }] })
-    //         localStorage.setItem("userListL", JSON.stringify(userList))
-    //         break
-    //     }
-    // }
+function login() {
+
+    var userList = JSON.parse(localStorage.getItem('userList'))
+    var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+    var username = document.getElementById("signUsername").value
+    var password = document.getElementById("signPassword").value
+    var modalSignin = document.getElementById('modalSignin')
+    var modalRegister = document.getElementById('modalRegister')
+    var accountExists = false
+
+    if (!cart) {
+        cart = []
+    }
+
+    for (var i = 0; i < userList.length; i++) {
+        if ((username == userList[i].username) && (password == userList[i].password)) {
+            accountExists = true
+            break
+        }
+    }
+    if (accountExists) {
+        // Konto finns       
+        var email = userList[i].email
+        userList.splice(i, 1)
+        userList.push({ username: username, password: password, email: email, orders: [{ date: new Date(), products: cart }] })
+            //userList[i].orders.products = cart
+        localStorage.setItem("userList", JSON.stringify(userList))
+            //window.location.pathname = 'kundvagnsida.html'
+        modalSignin.style.display = "none"
+        document.getElementById("signIn").innerText = "Logga ut"
+    } else {
+        modalRegister.style.display = "block"
+    }
 }
+
+// function findUser() {
+//     var userList = JSON.parse(localStorage.getItem('userList'))
+//     var cart = JSON.parse(localStorage.getItem('listOfProducts'))
+//     var username = document.getElementById("signUsername").value
+//     var password = document.getElementById("signPassword").value
+//     for (var i = 0; i < userList.length; i++) {
+//         if ((username == userList[i].username) && (password == userList[i].password)) {
+//             accountExists = true
+//             break
+//         }
+//     }
+//     if (accountExists) {
+
+//     }

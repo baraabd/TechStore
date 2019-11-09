@@ -14,8 +14,20 @@ function initSite() {
 
 /** Uses the loaded products data to create a visible product list on the website */
 
+
+
 function addProductsToWebpage() {
     // Check your console to see that the products are stored in the listOfProducts varible.
+    function changeCounterColor() {
+        if (getCartItems().length !== 0) {
+            document.getElementById("counter").style.backgroundColor = "#E64E4E"
+            cartItemsTitle.innerText = "Kundvagen"
+        } else {
+            document.getElementById("counter").style.backgroundColor = "#F5F5F5"
+            cartItemsTitle.innerText = "Vagnen är tom"
+        }
+    }
+
     document.getElementById("counter").innerHTML = getCartItems().length
     var totalPrice = 0
     var total = JSON.parse(localStorage.getItem('total'))
@@ -40,10 +52,13 @@ function addProductsToWebpage() {
     cartItemsTitleContainer.classList = "cartItemsTitleContainer"
     cartItemsTitle.innerText = "Kundvagen"
 
+
     container.classList = "cartContainer" + " " + "content-section"
     shopItems.classList = "cart-items"
 
     var cartItems = getCartItems()
+
+    changeCounterColor()
 
     for (var i = 0; i < cartItems.length; i++) {
         totalPrice += cartItems[i].price
@@ -118,6 +133,7 @@ function removeItem(index) {
     cart.splice(index, 1)
     localStorage.setItem("listOfProducts", JSON.stringify(cart))
     addProductsToWebpage()
+
 }
 
 function deletedData(index) {
