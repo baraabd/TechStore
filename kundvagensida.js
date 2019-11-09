@@ -17,6 +17,11 @@ function initSite() {
 function addProductsToWebpage() {
     // Check your console to see that the products are stored in the listOfProducts varible.
     document.getElementById("counter").innerHTML = getCartItems().length
+    if( document.getElementById("counter").innerHTML == null || document.getElementById("counter").innerHTML == 0 ){
+        document.getElementById("counter").style.backgroundColor = "#F5F5F5"
+    }else{
+        document.getElementById("counter").style.backgroundColor = "#E64E4E"
+    }
     var totalPrice = 0
     var total = JSON.parse(localStorage.getItem('total'))
     var body = document.getElementsByTagName("body")[0]
@@ -38,7 +43,12 @@ function addProductsToWebpage() {
 
     cartItemsTitleIcon.classList = "fas fa-shopping-cart"
     cartItemsTitleContainer.classList = "cartItemsTitleContainer"
-    cartItemsTitle.innerText = "Kundvagen"
+    if( document.getElementById("counter").innerHTML == null ||
+    document.getElementById("counter").innerHTML == 0 ){
+       cartItemsTitle.innerText = "Vagnen är tom";
+       }else{
+       cartItemsTitle.innerText = "Kundvagen"
+    }
 
     container.classList = "cartContainer" + " " + "content-section"
     shopItems.classList = "cart-items"
