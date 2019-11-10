@@ -23,10 +23,10 @@
         </div>
 
         <div class="shopping-cart">
-            <button id="signIn" class="signInOut" onclick="document.getElementById('modalSignin').style.display='block'" style="width:auto;">Logga in</button>
-            <a href="kundvagnsida.html" class="counter">
-                <i class="fas fa-shopping-cart" onclick="redirect()"></i>
-            </a>
+            <button id="signIn" class="signInOut" onclick="login1()">Logga in</button>
+            <div class="counter" onclick="goToProductspage()">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
             <div id="counter" class="counter"></div>
         </div>
 
@@ -37,60 +37,47 @@
 
         <div>
             <div id="modalSignin" class="modal">
-
                 <div class="modal-content animate">
                     <div class="imgcontainer">
-
                         <span onclick="document.getElementById('modalSignin').style.display='none'" class="close" title="Logga in">&times;</span>
                         <div class="signInText">Logga in</div>
                     </div>
 
                     <div class="signContainer1">
-
-                        <label><b>Användarnamn</b></label>
+                        <label for="uname"><b>Användarnamn</b></label>
                         <input type="text" placeholder="Enge Användarnamn!" id="signUsername" required>
-                        <label><b>lösnord</b></label>
+                        <label for="psw"><b>lösnord</b></label>
                         <input type="password" placeholder="Enge lösnord!" id="signPassword" required>
-                        <button onclick="login()">Logga in</button>
-                        <!--<input type="checkbox" checked="checked" id="remember"> Kommer ihåg mig -->
+                        <button type="submit" onclick="login()">Logga in</button>
+
 
                     </div>
-
                     <div class="signContainer">
-                        <span class="psw1">Ny på TechStore?<a href="#" id="signIn" onclick="document.getElementById('id02').style.display='block'" >Skapa ett konto</a></span>
+                        <span class="psw1">Ny på TechStore?<a href="#" id="signIn" onclick="document.getElementById('modalRegister').style.display='block'" >Skapa ett konto</a></span>
                     </div>
                 </div>
             </div>
-
         </div>
-
 
         <div>
             <div id="modalRegister" class="modal">
-
                 <div class="modal-content animate">
-
                     <div class="imgcontainer">
-                        <span onclick="document.getElementById('modalRegister').style.display='none'" class="close" title="Register">&times;</span>
-                        <div class="signInText">Register</div>
+                        <span onclick="document.getElementById( 'modalRegister').style.display='none'" class="close" title="Register">&times;</span>
+                        <div class="signInText ">Register</div>
                     </div>
 
                     <div class="regContainer">
-
                         <label><b>Användarnamn</b></label>
                         <input type="text" placeholder="Enge Användarnamn" id="regUsername" required>
                         <label><b>E-postadress</b></label>
                         <input type="text" placeholder="Enge E-postadress" id="RegEmail" required onclick="Generate()">
                         <button onclick="register()">Register</button>
-
                     </div>
-
                     <div class="signContainer">
                     </div>
-
                 </div>
             </div>
-
         </div>
 
 

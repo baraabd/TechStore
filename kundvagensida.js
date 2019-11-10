@@ -1,15 +1,15 @@
-var total = 0
-
-
 /** Get products from the localstorage and return the list */
 function getCartItems() {
-    var retrievedData = localStorage.getItem("listOfProducts")
+    var userList = JSON.parse(localStorage.getItem('userList'))
+    var userIndex = JSON.parse(localStorage.getItem('index'))
+    var retrievedData = userList[userIndex].products
     if (!retrievedData) { return [] }
-    return JSON.parse(retrievedData)
+    return retrievedData
 }
 
 function initSite() {
     addProductsToWebpage()
+
 }
 
 /** Uses the loaded products data to create a visible product list on the website */
@@ -18,6 +18,9 @@ function initSite() {
 
 function addProductsToWebpage() {
     // Check your console to see that the products are stored in the listOfProducts varible.
+
+
+
     function changeCounterColor() {
         if (getCartItems().length !== 0) {
             document.getElementById("counter").style.backgroundColor = "#E64E4E"
@@ -27,10 +30,12 @@ function addProductsToWebpage() {
             cartItemsTitle.innerText = "Vagnen är tom"
         }
     }
-
     document.getElementById("counter").innerHTML = getCartItems().length
+
+
     var totalPrice = 0
-    var total = JSON.parse(localStorage.getItem('total'))
+    var cartItems = getCartItems()
+
     var body = document.getElementsByTagName("body")[0]
     var container = document.getElementsByTagName("main")[0]
     container.innerHTML = ''
@@ -55,8 +60,6 @@ function addProductsToWebpage() {
 
     container.classList = "cartContainer" + " " + "content-section"
     shopItems.classList = "cart-items"
-
-    var cartItems = getCartItems()
 
     changeCounterColor()
 
@@ -96,6 +99,7 @@ function addProductsToWebpage() {
         shopItemTitle.innerText = cartItems[i].title
         shopItemImage.innerText = "./images" + cartItems[i].image
         shopItemPrice.innerText = cartItems[i].price + " " + "kr"
+        cartItems[i].price = totalPrice
 
         shopItem.appendChild(shopItemDetails)
 
@@ -108,17 +112,12 @@ function addProductsToWebpage() {
         shopItems.appendChild(shopItem)
     }
 
-
     cartItemsTitleContainer.appendChild(cartItemsTitle)
-
     container.appendChild(cartItemsTitleContainer)
     container.appendChild(shopItems)
     container.appendChild(totalCartItemsPrice)
     container.appendChild(closedPurchase)
-
     body.appendChild(container)
-
-
 
     // Add your code here, remember to brake your code in to smaller function blocks
     // to reduce complexity and increase readability. Each function should have
@@ -129,17 +128,56 @@ function addProductsToWebpage() {
 
 
 function removeItem(index) {
-    var cart = getCartItems()
-    cart.splice(index, 1)
-    localStorage.setItem("listOfProducts", JSON.stringify(cart))
+    var userIndex = JSON.parse(localStorage.getItem('index'))
+    var userList = JSON.parse(localStorage.getItem('userList'))
+    var total = document.getElementById("counter").innerHTML
+    userList[userIndex].products.splice(index, 1)
+
+    localStorage.setItem("userList", JSON.stringify(userList))
     addProductsToWebpage()
 
 }
 
 function deletedData(index) {
-    var cart = getCartItems()
-    cart.splice(0, cart.length)
-    localStorage.setItem("listOfProducts", JSON.stringify(cart))
-    window.location.pathname = 'index.html'
+    var userIndex = JSON.parse(localStorage.getItem('index'))
+    var userList = JSON.parse(localStorage.getItem('userList'))
 
+    userList[userIndex].products.splice(index, userList.products.length)
+    localStorage.setItem("userList", JSON.stringify(userList))
+    window.location.pathname = 'index.html'
+}
+
+
+function homePage() {
+    var index = JSON.parse(localStorage.getItem('index'))
+    var userList = JSON.parse(localStorage.getItem('userList'))
+    document.getElementById("counter").innerHTML = userList[index].products.length
+    changeCounterColor()
+}
+
+
+
+function login1() {
+    var checkLogin = "Logga in"
+    if (checkLoginCase() == "Logga in") {
+        modalSignin.style.display = "block"
+    } else {
+        document.getElementById("counter").innerText = 0
+        document.getElementById("signIn").innerText = checkLogin
+        localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
+        changeCounterColor()
+    }
+}
+
+function checkLoginCase() {
+    var checkCaseOfLogin = JSON.parse(localStorage.getItem('checkLogin'))
+    return checkCaseOfLogin
+}
+
+function goToProductspage() {
+    if (checkLoginCase() == "Logga in") {
+        modalSignin.style.display = "block"
+    } else {
+        window.location.pathname = 'kundvagnsida.html'
+    }
 }
