@@ -1,5 +1,7 @@
 var listOfProducts
 var total = 0
+var index = JSON.parse(localStorage.getItem('index'))
+var goToProductsPageStatus
 
 
 function loadProducts() {
@@ -10,23 +12,13 @@ function loadProducts() {
         .then(function(products) {
             listOfProducts = products
             addProductsToWebpage()
-                // var checkLogin = "Logga in"
-                // localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
         })
 }
 
 function initSite() {
     loadProducts()
-    var index = JSON.parse(localStorage.getItem('index'))
-    var userList = JSON.parse(localStorage.getItem('userList'))
-    if (userList == null) {} else {
-        if (userList[index].products.length == "0") {
-            document.getElementById("counter").innerText = "0"
-            changeCounterColor()
-        } else
-            document.getElementById("counter").innerText = userList[index].products.length
-        changeCounterColor()
-    }
+    loginInit()
+
 }
 
 function addProductsToWebpage() {
@@ -169,13 +161,26 @@ function login() {
     }
     if (accountExists) {
         //Konto finns
-        var checkLogin = "Logga ut"
-        document.getElementById("counter").innerHTML = userList[i].products.length
-        modalSignin.style.display = "none"
-        document.getElementById("signIn").innerText = checkLogin
-        localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
-        localStorage.setItem("index", JSON.stringify(i))
-        changeCounterColor()
+        if (goToProductsPageStatus) {
+            var checkLogin = "Logga ut"
+            document.getElementById("counter").innerHTML = userList[i].products.length
+            modalSignin.style.display = "none"
+            document.getElementById("signIn").innerText = checkLogin
+            localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
+            localStorage.setItem("index", JSON.stringify(i))
+            changeCounterColor()
+            window.location.pathname = 'kundvagnsida.html'
+            goToProductsPageStatus = false
+        } else {
+            var checkLogin = "Logga ut"
+            document.getElementById("counter").innerHTML = userList[i].products.length
+            modalSignin.style.display = "none"
+            document.getElementById("signIn").innerText = checkLogin
+            localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
+            localStorage.setItem("index", JSON.stringify(i))
+            changeCounterColor()
+        }
+
     } else {
         modalRegister.style.display = "block"
     }
@@ -183,13 +188,26 @@ function login() {
 
 function login1() {
     var checkLogin = "Logga in"
-    if (checkLoginCase() == "Logga in") {
+    if (checkLoginCase() == checkLogin) {
         modalSignin.style.display = "block"
     } else {
         document.getElementById("counter").innerText = 0
         document.getElementById("signIn").innerText = checkLogin
         localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
+        changeCounterColor()
+    }
+}
 
+
+
+function loginInit() {
+    var userList = JSON.parse(localStorage.getItem('userList'))
+    var checkLogin = "Logga in"
+    if (checkLoginCase() == checkLogin) {
+        document.getElementById("counter").innerText = 0
+    } else {
+        document.getElementById("counter").innerText = userList[index].products.length
+        document.getElementById("signIn").innerText = "Logga ut"
         changeCounterColor()
     }
 }
@@ -202,10 +220,13 @@ function checkLoginCase() {
 function goToProductspage() {
     if (checkLoginCase() == "Logga in") {
         modalSignin.style.display = "block"
+        goToProductsPageStatus = true
     } else {
         window.location.pathname = 'kundvagnsida.html'
     }
 }
+
+
 
 function changeCounterColor() {
     if (parseInt(document.getElementById("counter").innerHTML) != 0) {
