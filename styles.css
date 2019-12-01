@@ -9,13 +9,13 @@ html,
 body {
     margin: 0;
     padding: 0;
-    min-height: 100%;
+    height: 100%;
 }
 
 header {
     position: fixed;
     display: flex;
-    background-color: black;
+    background-color: #212121;
     min-height: 3em;
     justify-content: space-between;
     align-items: center;
@@ -102,41 +102,13 @@ header h1 {
     cursor: pointer;
 }
 
-.btn-header {
-    margin: .5em 15% 2em 15%;
-    color: white;
-    border: 2px solid #2D9CDB;
-    background-color: rgba(255, 255, 255, .1);
-    border-radius: 0;
-    font-size: 1.5em;
-    font-weight: lighter;
-    padding-left: 2em;
-    padding-right: 2em;
-}
-
-.btn-header:hover {
-    background-color: rgba(255, 255, 255, .3);
-}
-
-.btn-play {
-    display: block;
-    margin: 0 auto;
-    color: #2D9CDB;
-    font-size: 4em;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    padding: 0;
-    text-align: center;
-}
-
 .btn-primary {
     color: white;
-    background-color: #6397ed;
+    background-color: #5596F5;
     border: none;
     border-radius: .6em;
     font-weight: bold;
-    width: 200px;
+    width: 250px;
 }
 
 i.fas.fa-trash-alt.btn.cart-btn-primary.cart-item-button {
@@ -151,7 +123,7 @@ i.fas.fa-trash-alt.btn.closedPurchaseBtn.cart-item-button {
 
 .cart-btn-primary {
     color: white;
-    background-color: #cf3737;
+    background-color: #E64E4E;
     border: none;
     border-radius: .6em;
     font-weight: bold;
@@ -161,16 +133,12 @@ i.fas.fa-trash-alt.btn.closedPurchaseBtn.cart-item-button {
 
 .closedPurchaseBtn {
     color: white;
-    background-color: #374ecf;
+    background-color: #5596F5;
     border: none;
     border-radius: .6em;
     font-weight: bold;
     width: 250px;
     font-size: 1em;
-}
-
-.btn-primary:hover {
-    background-color: #2D9CDB;
 }
 
 .cart-item-details {
@@ -181,14 +149,14 @@ i.fas.fa-trash-alt.btn.closedPurchaseBtn.cart-item-button {
 
 .cart-item {
     margin-bottom: 20px;
-    margin-right: 30px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    border: 2px solid rgb(79, 79, 236);
+    border: 2px solid #5596F5;
     border-radius: 0.6em;
-    background-color: rgb(241, 241, 255);
+    background-color: #F5F5F5;
 }
 
 .shop-item-title {
@@ -197,12 +165,12 @@ i.fas.fa-trash-alt.btn.closedPurchaseBtn.cart-item-button {
     text-align: center;
     font-weight: bold;
     font-size: 2em;
-    color: #333;
+    color: #212121;
 }
 
 span.cart-item-price {
     margin-bottom: 15px;
-    color: rgb(12, 12, 12);
+    color: #212121;
     font-weight: bold;
 }
 
@@ -221,13 +189,13 @@ span.cart-item-price {
     text-align: center;
     font-weight: bold;
     font-size: 0.8em;
-    color: #333;
+    color: #212121;
     margin-bottom: 15px;
 }
 
 .shop-item-image {
-    height: 300px;
     width: auto;
+    height: 60vh;
 }
 
 .shop-item-details {
@@ -239,7 +207,7 @@ span.cart-item-price {
 
 .shop-item-price {
     flex-grow: 1;
-    color: #333;
+    color: #212121;
     margin: 20px;
     font-size: 1em;
     font-weight: bold;
@@ -291,15 +259,15 @@ span.cart-item-price {
     margin-bottom: 40px;
     font-size: 1.5em;
     font-weight: bold;
-    color: rgb(12, 12, 12);
+    color: #212121;
 }
 
 .cartItemsTitle {
-    color: rgb(31, 31, 31);
+    color: #212121;
 }
 
 i.fas.fa-trash-alt {
-    color: rgb(31, 31, 31);
+    color: #212121;
     font-size: 0.7em;
     margin-right: 10px;
 }
@@ -307,13 +275,13 @@ i.fas.fa-trash-alt {
 .cart-header {
     font-weight: bold;
     font-size: 1.25em;
-    color: #333;
+    color: #212121;
 }
 
 .cart-column {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #212121;
     margin-right: 1.5em;
     padding-bottom: 10px;
     margin-top: 10px;
@@ -328,7 +296,7 @@ i.fas.fa-trash-alt {
 .cart-price {
     width: 20%;
     font-size: 1.2em;
-    color: #333;
+    color: #212121;
 }
 
 .cart-quantity {
@@ -347,20 +315,16 @@ i.fas.fa-trash-alt {
     text-align: center;
     font-weight: bold;
     font-size: 2em;
-    color: #333;
+    color: #212121;
     margin-bottom: 15px;
 }
 
 .btn-danger {
     color: white;
-    background-color: #EB5757;
+    background-color: #E64E4E;
     border: none;
     border-radius: .6em;
     font-weight: bold;
-}
-
-.btn-danger:hover {
-    background-color: #CC4C4C;
 }
 
 i.fas.fa-trash-alt.btn.cart-btn-primary.cart-item-button {
@@ -371,23 +335,6 @@ i.fas.fa-trash-alt.btn.cart-btn-primary.cart-item-button {
 i.fas.fa-trash-alt.btn.closedPurchaseBtn.cart-item-button {
     font-size: 1.5em;
     color: white;
-}
-
-.cart-quantity-input {
-    height: 34px;
-    width: 50px;
-    border-radius: 0.6em;
-    border: 1px solid #56CCF2;
-    background-color: #eee;
-    color: #333;
-    padding: 0;
-    text-align: center;
-    font-size: 1.2em;
-    margin-right: 25px;
-}
-
-.cart-row:last-child {
-    border-bottom: 1px solid black;
 }
 
 .cart-row:last-child .cart-column {
@@ -403,19 +350,13 @@ i.fas.fa-trash-alt.btn.closedPurchaseBtn.cart-item-button {
 .cart-total-title {
     font-weight: bold;
     font-size: 1.5em;
-    color: black;
+    color: #212121;
     margin-right: 20px;
 }
 
 .cart-total-price {
-    color: #333;
+    color: #212121;
     font-size: 1.1em;
-}
-
-.btn-purchase {
-    display: block;
-    margin: 40px auto 80px auto;
-    font-size: 1.75em;
 }
 
 i.fas.fa-check {
@@ -432,11 +373,10 @@ i.fas.fa-check {
 
 #counter {
     font-weight: 500;
-    color: rgb(0, 0, 0);
+    color: #212121;
     font-size: 0.5em;
     margin-top: -30px;
     margin-right: -10px;
-    background-color: gray;
     border-radius: 30px;
     width: 2em;
     text-align: center;
@@ -448,10 +388,10 @@ a.back {
 }
 
 .signInOut {
-    background-color: rgb(0, 0, 0);
+    background-color: #212121;
     font-size: 0.7em;
     margin-right: 20px;
-    font-family: fantasy;
+    font-family: Raleway;
     text-align: center;
     color: white;
     text-decoration: none;
@@ -483,42 +423,7 @@ input[type=email] {
 .cancelbtn {
     width: auto;
     padding: 10px 18px;
-    background-color: #f44336;
-}
-
-
-/* Center the image and position the close button */
-
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-    text-align: right;
-    align-items: left;
-    margin-left: 80px;
-}
-
-span.psw1 {
-    float: right;
-    padding-top: 16px;
-    text-align: right;
-    align-items: left;
-    margin-left: 40px;
-    font-size: 0.8em;
-}
-
-a {
-    color: blue;
+    background-color: #E64E4E;
 }
 
 
@@ -539,7 +444,7 @@ a {
     /* Full height */
     overflow: auto;
     /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
+    background-color: #212121;
     /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
     /* Black w/ opacity */
@@ -559,10 +464,11 @@ a {
 
 .signInText {
     font-size: 1.5em;
-    color: black;
+    color: #212121;
     font-weight: bold;
     padding-top: 20px;
     width: auto;
+    margin-left: 20px;
 }
 
 button {
@@ -583,18 +489,36 @@ button:hover {
 /* The Close Button (x) */
 
 .close {
-    position: absolute;
+    position: relative;
     right: 5px;
     top: 0;
-    color: #000;
+    color: #212121;
     font-size: 25px;
     font-weight: bold;
+    float: right;
 }
 
 .close:hover,
 .close:focus {
-    color: red;
+    color: #E64E4E;
     cursor: pointer;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+    text-align: right;
+    align-items: left;
+    margin-left: 80px;
+}
+
+span.psw1 {
+    float: right;
+    padding-top: 16px;
+    text-align: right;
+    align-items: left;
+    margin-left: 40px;
+    font-size: 0.8em;
 }
 
 
@@ -604,6 +528,27 @@ button:hover {
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s
 }
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+
+/* Change styles for span and cancel button on extra small screens */
 
 @-webkit-keyframes animatezoom {
     from {
@@ -670,5 +615,26 @@ button:hover {
         background-color: #ffffff;
         border: 1px solid gray;
         margin: 20px;
+    }
+}
+
+@media screen and (max-width: 412px) {
+    .signInOut {
+        background-color: transparent;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .signInOut {
+        background-color: transparent;
+        font-size: 17px;
+    }
+    header h1 {
+        font-size: 17px;
+    }
+    .fa,
+    .fas {
+        color: white;
+        font-size: 20px;
     }
 }

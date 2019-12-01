@@ -144,6 +144,7 @@ function register() {
 }
 
 function login() {
+    var userIndex = JSON.parse(localStorage.getItem('index'))
     var userList = JSON.parse(localStorage.getItem('userList'))
     var username = document.getElementById("signUsername").value
     var password = document.getElementById("signPassword").value
@@ -159,18 +160,34 @@ function login() {
             break
         }
     }
+
+
+
     if (accountExists) {
         //Konto finns
         if (goToProductsPageStatus) {
-            var checkLogin = "Logga ut"
-            document.getElementById("counter").innerHTML = userList[i].products.length
-            modalSignin.style.display = "none"
-            document.getElementById("signIn").innerText = checkLogin
-            localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
-            localStorage.setItem("index", JSON.stringify(i))
-            changeCounterColor()
-            window.location.pathname = 'kundvagnsida.html'
-            goToProductsPageStatus = false
+
+            if (userList[userIndex].products.length == 0) {
+                var checkLogin = "Logga ut"
+                document.getElementById("counter").innerHTML = userList[i].products.length
+                modalSignin.style.display = "none"
+                document.getElementById("signIn").innerText = checkLogin
+                localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
+                localStorage.setItem("index", JSON.stringify(i))
+                goToProductsPageStatus = false
+                changeCounterColor()
+
+            } else {
+                var checkLogin = "Logga ut"
+                document.getElementById("counter").innerHTML = userList[i].products.length
+                modalSignin.style.display = "none"
+                document.getElementById("signIn").innerText = checkLogin
+                localStorage.setItem("checkLogin", JSON.stringify(checkLogin))
+                localStorage.setItem("index", JSON.stringify(i))
+                window.location.pathname = 'kundvagnsida.html'
+                changeCounterColor()
+                goToProductsPageStatus = false
+            }
         } else {
             var checkLogin = "Logga ut"
             document.getElementById("counter").innerHTML = userList[i].products.length
@@ -180,7 +197,6 @@ function login() {
             localStorage.setItem("index", JSON.stringify(i))
             changeCounterColor()
         }
-
     } else {
         modalRegister.style.display = "block"
     }
@@ -197,8 +213,6 @@ function login1() {
         changeCounterColor()
     }
 }
-
-
 
 function loginInit() {
     var userList = JSON.parse(localStorage.getItem('userList'))
@@ -226,8 +240,6 @@ function goToProductspage() {
     }
 }
 
-
-
 function changeCounterColor() {
     if (parseInt(document.getElementById("counter").innerHTML) != 0) {
         document.getElementById("counter").style.backgroundColor = "#E64E4E"
@@ -241,7 +253,6 @@ function getEventListener() {
         e = e || window.event
         var target = e.target || e.srcElement,
             text = target.textContent || target.innerText
-        alert(text)
     }, false)
 
 }
