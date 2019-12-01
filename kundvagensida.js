@@ -29,6 +29,11 @@ function addProductsToWebpage() {
         }
     }
     document.getElementById("counter").innerHTML = getCartItems().length
+    if( document.getElementById("counter").innerHTML == null || document.getElementById("counter").innerHTML == 0 ){
+        document.getElementById("counter").style.backgroundColor = "#F5F5F5"
+    }else{
+        document.getElementById("counter").style.backgroundColor = "#E64E4E"
+    }
     var totalPrice = 0
     var cartItems = getCartItems()
 
@@ -51,7 +56,12 @@ function addProductsToWebpage() {
 
     cartItemsTitleIcon.classList = "fas fa-shopping-cart"
     cartItemsTitleContainer.classList = "cartItemsTitleContainer"
-    cartItemsTitle.innerText = "Kundvagen"
+    if( document.getElementById("counter").innerHTML == null ||
+    document.getElementById("counter").innerHTML == 0 ){
+       cartItemsTitle.innerText = "Vagnen är tom";
+       }else{
+       cartItemsTitle.innerText = "Kundvagen"
+    }
 
     container.classList = "cartContainer" + " " + "content-section"
     shopItems.classList = "cart-items"

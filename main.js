@@ -16,9 +16,20 @@ function loadProducts() {
 }
 
 function initSite() {
+<<<<<<< HEAD
     loadProducts()
     loginInit()
 
+=======
+    loadProducts();
+    var count = JSON.parse(localStorage.getItem('listOfProducts')).length
+    document.getElementById("counter").innerHTML = count
+    if( count == null || count == 0 ){
+        document.getElementById("counter").style.backgroundColor = "#F5F5F5"
+    }else{
+        document.getElementById("counter").style.backgroundColor = "#E64E4E"
+    }
+>>>>>>> 9b68a4ed3cfe0fe7066402cd613f2a044875fdb7
 }
 
 function addProductsToWebpage() {
@@ -73,6 +84,7 @@ function createMobileCard(listOfProducts) {
     return shopItems
 }
 
+
 function addData(product) {
     var index = JSON.parse(localStorage.getItem('index'))
     var userList = JSON.parse(localStorage.getItem('userList'))
@@ -83,6 +95,20 @@ function addData(product) {
     if (!cart) {
         cart = []
     }
+<<<<<<< HEAD
+=======
+    cart.push(product)
+    total += parseInt(product.price)
+    localStorage.setItem("listOfProducts", JSON.stringify(cart))
+    localStorage.setItem("total", total)
+    document.getElementById("counter").innerHTML = cart.length
+    if( document.getElementById("counter").innerHTML == null || document.getElementById("counter").innerHTML == 0 ){
+        document.getElementById("counter").style.backgroundColor = "#F5F5F5"
+    }else{
+        document.getElementById("counter").style.backgroundColor = "#E64E4E"
+    }
+}
+>>>>>>> 9b68a4ed3cfe0fe7066402cd613f2a044875fdb7
 
     if (!userList) {
         userList = []
